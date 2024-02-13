@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Publish 
 
 on:
   release:
@@ -18,19 +18,19 @@ jobs:
           DOCKER_TAG=$(echo ${{ github.event.release.tag_name }} | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]._')
           docker build . --file Dockerfile --tag aurora:${DOCKER_TAG}
 
-      - name: Log in to Docker Hub
+      - name: Log in to Docker Hub with Access Token
         uses: docker/login-action@v1
         with:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKER_TAG=$(echo ${{ github.event.release.tag_name }} | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]._')
           docker push aurora:${DOCKER_TAG}
+
       - name: Push Docker image to Docker Hub with latest tag
         run: |
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker push aurora:latest 
+          docker tag aurora:${DOCKER_TAG} aurora:latest
+          docker push aurora:latest
