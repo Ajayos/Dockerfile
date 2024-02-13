@@ -33,7 +33,7 @@ COPY AURORA /AURORA
 WORKDIR /AURORA
 
 # Copy aurora.sh to /bin folder
-COPY AURORA/aurora.sh /bin/aurora
+COPY aurora.sh /bin/aurora
 
 # Set permissions for aurora.sh
 RUN chmod +x /bin/aurora
