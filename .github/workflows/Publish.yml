@@ -28,9 +28,9 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           DOCKER_TAG=$(echo ${{ github.event.release.tag_name }} | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]._')
-          docker push aurora:${DOCKER_TAG}
+          docker push ajayosak/aurora:${DOCKER_TAG}
 
       - name: Push Docker image to Docker Hub with latest tag
         run: |
-          docker tag aurora:${DOCKER_TAG} aurora:latest
-          docker push aurora:latest
+          docker tag ajayosak/aurora:${DOCKER_TAG} ajayosak/aurora:latest
+          docker push ajayosak/aurora:latest
