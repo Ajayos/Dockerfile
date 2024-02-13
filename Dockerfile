@@ -11,14 +11,14 @@ RUN apt-get update -y && apt-get upgrade -y
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
-RUN apt-get install -y curl wget
+RUN apt-get install -y curl wget sudo
 
 # Install Node.js using NodeSource
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 # Install necessary packages
-RUN apt-get install -y ffmpeg git imagemagick graphicsmagick sudo yarn
+RUN apt-get install -y ffmpeg git imagemagick graphicsmagick yarn
 
 # Install global packages: pm2, sqlite, and others as needed
 RUN npm install -g pm2 sqlite ajayos/nodelog @octokit/rest buffer 
