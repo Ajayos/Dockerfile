@@ -16,4 +16,4 @@ jobs:
       - name: Build the Docker image
         run: |
           DOCKER_TAG=$(echo ${{ github.event.release.tag_name }} | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]._')
-          docker build . --file Dockerfile --tag aurora:${DOCKER_TAG}
+          docker build . --file Dockerfile --tag ajayosak/aurora:${DOCKER_TAG}
